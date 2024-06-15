@@ -3,7 +3,6 @@ package ru.netology.selenide;
 import java.time.Duration;
 import java.time.LocalDate;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import java.time.format.DateTimeFormatter;
 import com.codeborne.selenide.Condition;
@@ -11,17 +10,14 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selenide.*;
 public class AppCardDeliveryTest{
-    private DateTimeFormatter DataTimeFormatter;
-
-    private @NotNull
-    String generateDate(long addDays, String pattern){
-        return LocalDate.now().plusDays(addDays).format(DataTimeFormatter.ofPattern(pattern));
+    private String generateDate(long addDays, String pattern) {
+        return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
     }
     @Test
     public void verification() {
         open("http://localhost:9999");
         $("[data-test-id='city'] input").setValue("Казань");
-        String date = generateDate(4, "dd.MM.yyyy");
+        String date = generateDate(4,"dd.MM.yyyy");
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id='date'] input").setValue(date);
         $("[data-test-id='name'] input").setValue("Петров Петр Петрович");
